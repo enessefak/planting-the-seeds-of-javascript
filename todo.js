@@ -1,16 +1,58 @@
 // Todo object
-// const todo = {
-//     body: 'Do something',
-//     completed: false,
-//     created_at: new Date(),
-//     deadline: new Date('2021-12-31'),
-// }
+const todo = {
+    id: 2,
+    body: 'Do something',
+    completed: false,
+    created_at: new Date(),
+    deadline: new Date('2021-12-31'),
+}
 
-let todos = []
+const rawTodosData = localStorage.getItem('todos')
+let todos = rawTodosData ? JSON.parse(rawTodosData) : []
 
 // CRUD Operations
 
 const $list = document.getElementById('todos')
+
+// Todo: Implement the following function HTML
+const callOperations = async () => {
+    const { fetchTodos, addTodo, updateTodo, deleteTodo } = await crudOperations()
+
+    // const addedTodo = await akbank(todo)
+    // const todos = await fetchTodos()
+    // const updatedPost = await updateTodo(1, { completed: false })
+    // const deletedTodoId = await deleteTodo(1)
+
+    const [
+        addedTodo,
+        todos,
+        updatedPost,
+        deletedTodoId
+    ] = await Promise.all([addTodo(todo), fetchTodos(), updateTodo(1, { completed: false }), deleteTodo(1)])
+
+    // const [
+    //     addedTodo,
+    //     todos,
+    //     updatedPost,
+    //     deletedTodoId
+    // ] = result
+
+    // const addedTodo = result[0]
+    // const todos = result[1]
+}
+
+function completedToDo(updatedId) {
+    todos = todos.map(todo => {
+        if (todo.id === updatedId) {
+            return {
+                ...todo,
+                completed: !todo.completed
+            }
+        }
+
+        return todo
+    })
+}
 
 // Ekleme
 function addTodo() {
@@ -27,12 +69,14 @@ function addTodo() {
 
     todos.push(newTodo)
     input.value = ''
+    localStorage.setItem('todos', JSON.stringify(todos))
     getTodos()
 }
 
 // Silme
 function deleteTodo(deletedTodoId) {
     todos = todos.filter(t => t.id !== deletedTodoId)
+    localStorage.setItem('todos', JSON.stringify(todos))
 }
 
 // Güncelleme
@@ -46,6 +90,7 @@ function updateTodo(updatedId, updatedTodo) {
         }
         return todo
     })
+    localStorage.setItem('todos', JSON.stringify(todos))
 }
 
 // Temizlmek
@@ -120,4 +165,4 @@ function getTodos() {
 //     completed: true,
 // })
 
-// getTodos()
+getTodos()
