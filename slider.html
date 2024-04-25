@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="slider.css">
+</head>
+<body>
+    <div id="slider">
+        <div class="slider-wrapper">
+            <div class="slider-item">1</div>
+            <div class="slider-item">2</div>
+            <div class="slider-item">3</div>
+            <div class="slider-item">4</div>
+        </div>
+        <div class="slider-controls">
+            <button class="slider-control" id="prev" data-action="prev">Prev</button>
+            <button class="slider-control" id="next" data-action="next">Next</button>
+            <input type="range" min="1" max="5" value="1" class="slider-range" id="range">
+            <input type="number" class="slider-range-value" id="range-value">
+        </div>
+    </div>
+    <script src="slider.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>

@@ -11,7 +11,6 @@ const rawTodosData = localStorage.getItem('todos')
 let todos = rawTodosData ? JSON.parse(rawTodosData) : []
 
 // CRUD Operations
-
 const $list = document.getElementById('todos')
 
 // Todo: Implement the following function HTML
